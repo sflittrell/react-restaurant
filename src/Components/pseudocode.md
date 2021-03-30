@@ -6,20 +6,20 @@ Objects:
 
         Data:
             Menu: [
-                name: Breakfast, amount: 10, price: 10, 15, data: []
-                name: Lunch, amount: 10, price: 10, 15, data: []
-                name: Appetizers, amount: 6, price: 10, 15, data: []
-                name: Dinner, amount: 12, price: 10, 15, data: []
-                name: Desserts, amount: 5, price: 10, 15, data: []
-                name: Drinks, amount: 6, price: 10, 15, data: []
+                name: Breakfast, amount: 10, price: 10, 15, data: [// info from the API call]
+                name: Lunch, amount: 10, price: 10, 15, data: [// info from the API call]
+                name: Appetizers, amount: 6, price: 10, 15, data: [// info from the API call]
+                name: Dinner, amount: 12, price: 10, 15, data: [// info from the API call]
+                name: Desserts, amount: 5, price: 10, 15, data: [// info from the API call]
+                name: Drinks, amount: 6, price: 10, 15, data: [// info from the API call]
             ]
-
-            API Call (meal type 1)
-            API Call (meal type 3)
-            API Call (meal type 6)
-            API Call (meal type 5)
-            API Call (meal type 7)
-            API Call (meal type 8)
+        Functions:
+            API Call (meal type 1 - breakfast)
+            API Call (meal type 3 - lunch)
+            API Call (meal type 6 - appetizers)
+            API Call (meal type 5 - dinner)
+            API Call (meal type 7 - desserts)
+            API Call (meal type 8 - drinks)
 
     Header:
 
@@ -39,10 +39,10 @@ Objects:
 
     Item: // an individual food item 
 
-        function randomNumber(X, Y)
-            create a random between X and Y where X and Y are determined by meal type
+        Functions:
+        function randomNumber(X, Y) - create a random num between X and Y where X and Y are determined by meal type price
 
-            function randomIntFromInterval(min, max) { // min and max included 
+            function randomNum(min, max) { // min and max included 
                 return Math.floor(Math.random() * (max - min + 1) + min);
 }
 
