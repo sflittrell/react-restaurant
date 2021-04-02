@@ -10,6 +10,7 @@ class App extends React.Component {
   constructor() {
     super()
     this.state = {
+      sort: 'Breakfast',
       menu: [
         { meal: 'Breakfast', mealType: 1, amount: 6, minMax: [10, 15], data: [] },
         { meal: 'Lunch', mealType: 3, amount: 10, minMax: [12, 18], data: [] },
@@ -19,6 +20,8 @@ class App extends React.Component {
         { meal: 'Drinks', mealType: 8, amount: 6, minMax: [2, 5], data: [] },
       ]
     }
+    this.clickHelper = this.clickHelper.bind(this);
+
   }
 
   componentDidMount() {
@@ -28,7 +31,7 @@ class App extends React.Component {
       this.setState({ menu: JSON.parse(menu) })
     } else {
       this.callHelper();
-console.log(this.state)
+      console.log(this.state)
     }
   }
 
@@ -59,21 +62,46 @@ console.log(this.state)
     // console.log(this.state.menu[0].data)
   }
 
+  clickHelper(meal) {
+    console.log('clicked')
+    this.setState({ sort: meal })
+  }
+
   randomNum(min, max) {
     return `$${Math.floor(Math.random() * (max - min + 1) + min)}`;
   }
 
   render() {
 
+    let filteredArr = this.state.menu.filter(item => {
+      if (this.state.sort === 'Breakfast' && item.meal === 'Breakfast') {
+        return item;
+      } else if (this.state.sort === 'Lunch' && item.meal === 'Lunch') {
+        return item;
+      } else if (this.state.sort === 'Appetizers' && item.meal === 'Appetizers') {
+        return item;
+      } else if (this.state.sort === 'Dinner' && item.meal === 'Dinner') {
+        return item;
+      } else if (this.state.sort === 'Desserts' && item.meal === 'Desserts') {
+        return item;
+      } else if (this.state.sort === 'Drinks' && item.meal === 'Drinks') {
+        return item;
+      }
+    })
+
     return (
 
       <div className="App">
-        <Header />
+        <Header
+          clickHelper={this.clickHelper}
+
+        />
         <p>
 
         </p>
         <div className="m-3">
-          {this.state.menu.map((section, index) =>
+        {console.log(filteredArr)}
+          {filteredArr.map((section, index) =>
             <Section
               section={section}
               key={index}
