@@ -15,7 +15,7 @@ function Section(props) {
                 <div className="accordion-item">
                     <h2 className="accordion-header" id={`flush-heading${props.index}`}>
                         <button className="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target={`#flush-collapse${props.index}`} aria-expanded="false" aria-controls={`flush-collapse${props.index}`}>
-                            */}<h1>{props.sectionTitle}</h1>
+                            */}<h1 className="fw-bold">{props.sectionTitle}</h1>
                             <hr></hr>
                                 
                             {/*

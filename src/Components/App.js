@@ -91,7 +91,8 @@ class App extends React.Component {
 
     return (
 
-      <div className="App">
+      <div className="App sticky-top">
+      
         <Header
           clickHelper={this.clickHelper}
 
