@@ -5,9 +5,9 @@ function Item(props) {
     return (
 
         <div className="mt-2">
-            <h3 className="mt-2 text-uppercase fw-bold">
+            <h4 className="mt-2 text-uppercase fw-bold">
                 {props.item.name}
-            </h3>
+            </h4>
             <p>
             {props.item.description}
             </p>

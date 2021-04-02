@@ -62,13 +62,13 @@ class App extends React.Component {
     // console.log(this.state.menu[0].data)
   }
 
-  clickHelper(meal) {
-    console.log('clicked')
-    this.setState({ sort: meal })
-  }
-
   randomNum(min, max) {
     return `$${Math.floor(Math.random() * (max - min + 1) + min)}`;
+  }
+
+  clickHelper(meal) {
+    // console.log('clicked')
+    this.setState({ sort: meal })
   }
 
   render() {
@@ -92,7 +92,7 @@ class App extends React.Component {
     return (
 
       <div className="App sticky-top">
-      
+
         <Header
           clickHelper={this.clickHelper}
 
@@ -101,7 +101,7 @@ class App extends React.Component {
 
         </p>
         <div className="m-3">
-        {console.log(filteredArr)}
+          {/* {console.log(filteredArr)} */}
           {filteredArr.map((section, index) =>
             <Section
               section={section}
