@@ -1,6 +1,7 @@
 import React from 'react'
 import Header from './Header'
 import Axios from 'axios';
+import Section from './Section'
 
 // import './App.css';
 
@@ -10,22 +11,24 @@ class App extends React.Component {
     super()
     this.state = {
       menu: [
-        { index: 0, mealType: 1, amount: 10, price: (10, 15), data: [] },
-        { index: 1, mealType: 3, amount: 10, price: (12, 18), data: [] },
-        { index: 2, mealType: 6, amount: 6, price: (5, 12), data: [] },
-        { index: 3, mealType: 5, amount: 12, price: (15, 30), data: [] },
-        { index: 4, mealType: 7, amount: 5, price: (7, 15), data: [] },
-        { index: 5, mealType: 8, amount: 6, price: (2, 5), data: [] },
+        { meal: 'Breakfast', mealType: 1, amount: 6, minMax: [10, 15], data: [] },
+        { meal: 'Lunch', mealType: 3, amount: 10, minMax: [12, 18], data: [] },
+        { meal: 'Appetizers', mealType: 4, amount: 5, minMax: [5, 12], data: [] },
+        { meal: 'Dinner', mealType: 5, amount: 12, minMax: [15, 30], data: [] },
+        { meal: 'Desserts', mealType: 7, amount: 4, minMax: [7, 15], data: [] },
+        { meal: 'Drinks', mealType: 8, amount: 6, minMax: [2, 5], data: [] },
       ]
     }
   }
 
   componentDidMount() {
+    // this.callHelper();
     let menu = window.localStorage.getItem('menu')
     if (menu) {
       this.setState({ menu: JSON.parse(menu) })
     } else {
       this.callHelper();
+console.log(this.state)
     }
   }
 
@@ -35,24 +38,30 @@ class App extends React.Component {
       let apiURL = `http://awesomeincbootcampapi-ianrios529550.codeanyapp.com:3000/public/api/menu/type/${this.state.menu[i].mealType}`;
       Axios.get(apiURL)
         .then((response) => {
-          console.log('line 16, in cdm axios call', response.data);
           let tempMenu = this.state.menu;
-          tempMenu[i].data.push(response.data);
-          this.setState({ 
-            menu: tempMenu//[...this.state.menu, response.data]
+          // console.log(response.data);
+          tempMenu[i].data = response.data.map((obj) => {
+            obj.price = this.randomNum(this.state.menu[i].minMax[0], this.state.menu[i].minMax[1])
+            return obj
           })
+
+          this.setState({
+            menu: tempMenu,
+          })
+          window.localStorage.setItem('menu', JSON.stringify(this.state.menu)) // sets local storage
+          // console.log(this.state.menu)
         })
         .catch(function (error) {
           // handle error
           console.log(error);
         })
     }
+    // console.log(this.state.menu[0].data)
   }
-  
 
-  
-
-
+  randomNum(min, max) {
+    return `$${Math.floor(Math.random() * (max - min + 1) + min)}`;
+  }
 
   render() {
 
@@ -61,8 +70,18 @@ class App extends React.Component {
       <div className="App">
         <Header />
         <p>
-          Stuff
+
         </p>
+        <div className="m-3">
+          {this.state.menu.map((section, index) =>
+            <Section
+              section={section}
+              key={index}
+              sectionTitle={section.meal}
+              index={index}
+            />
+          )}
+        </div>
       </div>
     );
   }
